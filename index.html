@@ -1,41 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Cyber Threat Dashboard</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Cyber Defense System</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 </head>
 <body>
 
-    <div class="container">
+<div class="app">
 
-        <h1 class="title">CYBER THREAT MONITOR</h1>
+    <header>
+        <h1>CYBER DEFENSE SYSTEM</h1>
+        <p>Real-Time Threat Intelligence</p>
+    </header>
 
-        <div class="dashboard">
+    <div class="controls">
+        <button onclick="setFilter('ALL')">ALL</button>
+        <button onclick="setFilter('LOW')">LOW</button>
+        <button onclick="setFilter('MEDIUM')">MEDIUM</button>
+        <button onclick="setFilter('HIGH')">HIGH</button>
+        <button onclick="simulateAttack()">⚠ MASS ATTACK</button>
+    </div>
 
-            <div class="card">
-                <h2>Threat Logs</h2>
-                <div id="logs"></div>
-            </div>
+    <div class="grid">
 
-            <div class="card">
-                <h2>Active Threat Level</h2>
-                <p id="threatLevel">LOW</p>
-            </div>
+        <div class="card logs">
+            <h2>Threat Logs</h2>
+            <div id="logs"></div>
+        </div>
 
-            <div class="card">
-                <h2>Total Attacks</h2>
-                <p id="attackCount">0</p>
-            </div>
-            <div class="card">
-            <h2>Attack Activity</h2>
+        <div class="card">
+            <h2>Threat Level</h2>
+            <p id="threatLevel">LOW</p>
+        </div>
+
+        <div class="card">
+            <h2>Total Attacks</h2>
+            <p id="attackCount">0</p>
+        </div>
+
+        <div class="card">
+            <h2>Attack Chart</h2>
             <canvas id="attackChart"></canvas>
-</div>
+        </div>
 
+        <div class="card map">
+            <h2>Global Attacks</h2>
+            <div id="map"></div>
         </div>
 
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="script.js"></script>
+
+</div>
+<div id="criticalAlert"></div>
+<canvas id="particles"></canvas>
+<script src="script.js"></script>
 </body>
 </html>

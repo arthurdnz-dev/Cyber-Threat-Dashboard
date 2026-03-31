@@ -1,57 +1,122 @@
 body {
-    background-color: #000;
-    color: #00ff00;
-    font-family: monospace;
     margin: 0;
+    font-family: monospace;
+    background: radial-gradient(circle, #050505, #000);
+    color: #00ff9f;
+}
+
+header {
+    text-align: center;
+    padding: 15px;
+    border-bottom: 1px solid #00ff9f;
+}
+
+.controls {
+    text-align: center;
+    margin: 10px;
+}
+
+button {
+    position: relative;
     overflow: hidden;
 }
 
-.container {
-    padding: 20px;
+button::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 100%;
+    background: #00ff9f;
+    left: 0;
+    top: 0;
+    transition: 0.3s;
+    z-index: -1;
 }
 
-.title {
-    text-align: center;
-    margin-bottom: 20px;
-    animation: glitch 1s infinite;
+button:hover::after {
+    width: 100%;
 }
 
-/* Efeito de glitch */
-@keyframes glitch {
-    0% { text-shadow: 2px 2px red; }
-    50% { text-shadow: -2px -2px blue; }
-    100% { text-shadow: 2px -2px green; }
-}
-
-.dashboard {
-    display: flex;
-    gap: 20px;
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    padding: 15px;
 }
 
 .card {
-    border: 1px solid #00ff00;
+    border: 1px solid #00ff9f;
     padding: 15px;
-    width: 30%;
-    background-color: rgba(0, 0, 0, 0.9);
-    box-shadow: 0 0 10px #00ff00;
+    background: rgba(0,0,0,0.85);
+    box-shadow: 0 0 20px #00ff9f33;
+    transition: 0.3s;
+    backdrop-filter: blur(5px);
+}
+
+.card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 0 30px #00ff9f;
+}
+
+.logs {
+    grid-column: span 2;
+}
+
+.map {
+    grid-column: span 3;
 }
 
 #logs {
     height: 300px;
     overflow-y: auto;
-    font-size: 13px;
+    font-size: 12px;
 }
 
-/* CORES DE RISCO */
-.low { color: #00ff00; }
+#map {
+    height: 300px;
+}
+
+.low { color: #00ff9f; }
 .medium { color: yellow; }
 .high { color: red; }
-
-/* ALERTA PISCANDO */
-.alert {
-    animation: blink 0.5s infinite;
+body::before {
+    content: "";
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0,255,150,0.05),
+        rgba(0,255,150,0.05) 1px,
+        transparent 1px,
+        transparent 3px
+    );
+    pointer-events: none;
+    animation: scan 5s linear infinite;
 }
 
-@keyframes blink {
-    50% { opacity: 0.2; }
+@keyframes scan {
+    from { transform: translateY(0); }
+    to { transform: translateY(100%); }
+}
+#criticalAlert {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,0,0,0.1);
+    color: red;
+    font-size: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+}
+#particles {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
 }
